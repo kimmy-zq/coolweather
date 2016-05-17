@@ -11,7 +11,7 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper{
 	 province建表语句
 	
 	 */
-	public static final String CREATE_PROVICE =  "create table Province ("   //将建表语句定义为常量
+	public static final String CREATE_PROVINCE =  "create table Province ("   //将建表语句定义为常量
 			+ "id integer primary key autoincrement , "   //id 为自增长主键
 			+ "province_name text , " 			//	省名     "  
 			+ "province_code text )";			//	省代号
@@ -35,7 +35,7 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper{
 	}
 	
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_PROVICE) ; 			//创建省表 将建表语句定义为常量 在这个方法里面执行创建
+		db.execSQL(CREATE_PROVINCE) ; 			//创建省表 将建表语句定义为常量 在这个方法里面执行创建
 		db.execSQL(CREATE_CITY);
 		db.execSQL(CREATE_COUNTY);		
 	}

@@ -26,38 +26,44 @@ import com.coolweather.app.util.HttpUtil;
 import com.coolweather.app.util.Utility;
 
 public class ChooseAreaActivity extends Activity {
-	
+//		定义常量涉及到数据存储 数据库
 		public static final int LEVEL_PROVINCE = 0 ;
 		public static final int LEVEL_CITY = 1 ;
 		public static final int LEVEL_COUNTY = 2 ;
-		
+//		定义数据类型 好建对象
 		private ProgressDialog progressDialog;
 		private TextView titleText ;
 		private ListView listView;
 		private ArrayAdapter<String> adapter;
 		private CoolWeatherDB coolWeatherDB;
 		private List<String> dataList = new ArrayList<String>();
-		
+//		省市县列表
 		private List<Province> provinceList;
 		private List<City> cityList;
 		private List<County> countyList;
-		
+//光标选中的省市位置		当前的选中级别一起用来判断是否继续下去
 		private Province selectedProvince;
 		private City selectedCity;
 		private int currentLevel;
 		
+	@Override	
+//	主活动创建方法添加逻辑
 		protected void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
+			super.onCreate(savedInstanceState);		//
+			
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			
 			setContentView(R.layout.choose_area);
 			listView = (ListView) findViewById(R.id.list_view);
 			titleText = (TextView) findViewById(R.id.title_text);
 			
 			adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , dataList);
 			listView.setAdapter(adapter);
+//			得到数据库实例
 			coolWeatherDB = CoolWeatherDB.getInstance(this);
+//			直接在这里面内部类直接用监听器
 			listView.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick ( AdapterView <?> arg0 , View view , int index , 
+				public void onItemClick ( AdapterView<?> arg0 , View view , int index , 
 						long arg3) {
 					if ( currentLevel == LEVEL_PROVINCE) {
 						selectedProvince = provinceList.get(index);
@@ -68,7 +74,7 @@ public class ChooseAreaActivity extends Activity {
 					}
 				}
 			});
-			queryProvinces();
+			queryProvinces();	
 		}
 		
 	private void queryProvinces(){
@@ -176,7 +182,7 @@ public class ChooseAreaActivity extends Activity {
 
 	private void showProgressDialog() {
 		// TODO Auto-generated method stub
-		if(progressDialog == null) {
+		if( progressDialog == null) {
 			progressDialog = new ProgressDialog(this);
 			progressDialog.setMessage("正在加载...");
 			progressDialog.setCanceledOnTouchOutside(false);
